@@ -53,12 +53,27 @@
         position:absolute; opacity:0; width:1px; height:1px; overflow:hidden; /* accessible, visually hidden */
       }
       .dot{
-        width:14px; height:14px; border-radius:50%;
+        width:14px; height:14px; border-radius:3px;
         display:inline-block; background:#cfe2b3; border:2px solid #cfe2b3;
         transition:background .15s, border-color .15s;
+        position:relative;
       }
       .channels input[type="checkbox"]:focus + .dot{ outline:2px solid #cfe2b3; outline-offset:2px; }
-      .channels input[type="checkbox"]:checked + .dot{ background:var(--olive); border-color:var(--olive); }
+      .channels input[type="checkbox"]:checked + .dot{ 
+        background:var(--olive); 
+        border-color:var(--olive);
+      }
+      .channels input[type="checkbox"]:checked + .dot::after{
+        content:"✓";
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%, -50%);
+        color:white;
+        font-size:10px;
+        font-weight:bold;
+        line-height:1;
+      }
 
       /* Slider + number input */
       .slider-row{ display:flex; align-items:center; gap:16px; margin-top:8px; }
