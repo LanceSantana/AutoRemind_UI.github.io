@@ -10,13 +10,13 @@
 
     <style>
       :root{
-        --olive:#3e5f3a; --olive-dark:#2f472c; --pale:#e7efd9;
+        --olive:#3e5f3a; --olive-dark:#35472c; --pale:#e7efd9;
         --text:#0e0e0e; --muted:#6b6b6b; --line:#e6e6e6;
       }
       *{ box-sizing:border-box; }
       html,body{ margin:0; padding:0; }
-      body{ font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:var(--text); background:#fff; }
-      .container{ width:min(1100px,92vw); margin:0 auto; }
+      body{ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif; color:var(--text); background:#fff; }
+      .container{ width:min(1100px,92vw); margin:0 auto; padding-bottom:100px; }
 
       /* Top nav */
       .nav{ position:sticky; top:0; z-index:10; display:flex; align-items:center; justify-content:space-between; padding:18px clamp(16px,4vw,28px); background:#fff; }
@@ -103,12 +103,23 @@
       }
       .num-input:focus{ outline:2px solid #cfe2b3; border-color:#cfe2b3; }
 
-      .cta-wrap{ display:flex; justify-content:center; margin:145px 0 36px; }
+      .cta-wrap{ 
+        position: fixed; 
+        bottom: 7vh; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        z-index: 100; 
+        margin: 0; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 68px;
+      }
       .btn--cta{ background:var(--olive); color:#fff; padding:12px 22px; border-radius:999px; font-size:16px; }
       .btn--cta:hover{ background:var(--olive-dark); }
 
       /* Big green arc */
-      .arc-bg{ position:fixed; left:50%; transform:translateX(-50%); bottom:-35vh; width:130vw; height:60vh; border-radius:50% 50% 0 0 / 100% 100% 0 0; background:var(--pale); z-index:-1; }
+      .arc-bg{ position:fixed; left:50%; transform:translateX(-50%); bottom:-35vh; width:70vw; height:55vh; border-radius:50% 50% 0 0 / 100% 100% 0 0; background:var(--pale); z-index:-1; }
 
       /* Footer (renamed to avoid theme's blue .footer) */
       .site-footer{ text-align:center; margin:8px auto 36px; background:transparent !important; }
@@ -228,17 +239,15 @@
 
       <div class="cta-wrap">
         <button class="btn btn--cta">AutoRemind Me!</button>
+        <small style="text-align: center; color: var(--muted); font-size: 13px;">
+          <span class="thanks">Thanks for trying our tool.</span>
+          <span class="feedback"> Share your feedback to help us improve.</span>
+        </small>
       </div>
     </section>
 
-    <!-- Arc + footer -->
+    <!-- Arc -->
     <div class="arc-bg"></div>
-    <footer class="site-footer container">
-      <small>
-        <span class="thanks">Thanks for trying our tool.</span>
-        <span class="feedback"> Share your feedback to help us improve.</span>
-      </small>
-    </footer>
   </body>
 </html>
 <data value=""></data>
