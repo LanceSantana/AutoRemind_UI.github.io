@@ -75,6 +75,19 @@
         line-height:1;
       }
 
+      /* Contact input fields */
+      .contact-input{
+        width:100%; margin-top:8px; padding:8px 12px;
+        border:1px solid var(--line); border-radius:8px;
+        font-size:14px; background:#fff;
+        transition:border-color .15s, box-shadow .15s;
+      }
+      .contact-input:focus{
+        outline:none; border-color:var(--olive);
+        box-shadow:0 0 0 2px rgba(62, 95, 58, 0.1);
+      }
+      .contact-input::placeholder{ color:var(--muted); }
+
       /* Slider + number input */
       .slider-row{ display:flex; align-items:center; gap:16px; margin-top:8px; }
       .minmax{ font-size:14px; color:#333; }
@@ -139,6 +152,7 @@
                 <span class="dot" aria-hidden="true"></span>
                 <span>Discord</span>
               </label>
+              <input id="discord-input" type="text" placeholder="Enter Discord username" class="contact-input" style="display:none;" />
             </li>
             <li>
               <label for="ch-sms">
@@ -146,6 +160,7 @@
                 <span class="dot" aria-hidden="true"></span>
                 <span>SMS</span>
               </label>
+              <input id="sms-input" type="tel" placeholder="Enter phone number" class="contact-input" style="display:none;" />
             </li>
             <li>
               <label for="ch-email">
@@ -153,6 +168,7 @@
                 <span class="dot" aria-hidden="true"></span>
                 <span>Email</span>
               </label>
+              <input id="email-input" type="email" placeholder="Enter email address" class="contact-input" style="display:none;" />
             </li>
           </ul>
         </div>
@@ -183,6 +199,28 @@
             num.addEventListener('input', () => {
               const v = Math.min(30, Math.max(1, Number(num.value||1)));
               num.value = v; rng.value = v;
+            });
+
+            // show/hide contact input fields based on checkbox state
+            const checkboxes = {
+              'ch-discord': 'discord-input',
+              'ch-sms': 'sms-input', 
+              'ch-email': 'email-input'
+            };
+
+            Object.keys(checkboxes).forEach(checkboxId => {
+              const checkbox = document.getElementById(checkboxId);
+              const input = document.getElementById(checkboxes[checkboxId]);
+              
+              checkbox.addEventListener('change', () => {
+                if (checkbox.checked) {
+                  input.style.display = 'block';
+                  input.focus();
+                } else {
+                  input.style.display = 'none';
+                  input.value = ''; // clear the input when unchecked
+                }
+              });
             });
           </script>
         </div>
