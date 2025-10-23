@@ -76,8 +76,7 @@
       .channel-field{
         display:none;            /* shown via JS when checked */
         width:100%;
-        /* indent = dot width + 2*border + gap, so input starts under label text */
-        margin:8px 0 0 calc(var(--dot-size) + (2 * var(--dot-border)) + var(--label-gap));
+        margin:8px 0 0 0;        /* removed left margin to align with checkbox */
         padding:10px 12px;
         font-size:15px;
         border:1px solid var(--line);
