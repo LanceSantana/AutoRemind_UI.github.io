@@ -1,84 +1,78 @@
-<!DOCTYPE HTML>  
-<html>  
-    <header>
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="table_style.css">
-        <title>My Webpage Title</title>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AutoRemind – Login</title>
+
+    <style>
+      :root {
+        --olive:#3e5f3a; --olive-dark:#2f472c; --pale:#e7efd9;
+        --text:#0e0e0e; --line:#e6e6e6;
+      }
+      * { box-sizing:border-box; }
+      body {
+        margin:0; padding:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+        color:var(--text); background:#fff; display:flex; flex-direction:column; min-height:100vh;
+      }
+      .container { width:min(1100px,92vw); margin:0 auto; }
+
+      /* Nav */
+      .nav{ position:sticky; top:0; z-index:10; display:flex; align-items:center; justify-content:space-between; padding:18px clamp(16px,4vw,28px); background:#fff; }
+      .brand{ font-size:28px; font-weight:700; text-decoration:none; color:var(--text); letter-spacing:.2px; }
+      .nav__right{ display:flex; gap:22px; align-items:center; }
+      .nav__link{ text-decoration:none; color:#111; font-size:15px; }
+      .nav__link:hover{ text-decoration:underline; }
+      .btn{ border:0; cursor:pointer; font-weight:600; border-radius:999px; padding:10px 16px; }
+      .btn--primary{ background:var(--olive); color:#fff; padding:10px 18px; text-decoration:none; }
+      .btn--primary:hover{ background:var(--olive-dark); text-decoration:none; }
+
+      /* Hero section */
+      .hero {
+        display:flex; justify-content:center; align-items:center; flex-direction:column;
+        flex-grow:1; text-align:center; height:100%; flex:1; margin-top:-20vh;
+      }
+      .hero h1 { font-size:clamp(28px,5vw,42px); margin-bottom:24px; font-weight:500; }
+
+      /* Login button */
+      .btn--login {
+        background:var(--olive); color:#fff; padding:14px 28px; font-size:18px; border:none; border-radius:999px; cursor:pointer;
+      }
+      .btn--login:hover { background:var(--olive-dark); }
+
+      /* Green arc background */
+      .arc-bg {
+        position:fixed; left:50%; transform:translateX(-50%); bottom:-35vh; width:130vw; height:60vh;
+        border-radius:50% 50% 0 0 / 100% 100% 0 0; background:var(--pale); z-index:-1;
+      }
+
+      footer { text-align:center; margin:16px 0 32px; font-size:14px; color:#444; }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <header class="nav">
+      <div class="nav__left">
+        <a class="brand" href="./index.html">AutoRemind</a>
+      </div>
+      <nav class="nav__right">
+        <a href="./list.html" class="nav__link">How-to</a>
+        <a href="#" class="nav__link">Accessibility</a>
+        <a href="#" class="nav__link">About Us</a>
+        <a href="#" class="btn btn--primary" style="text-decoration:none;">Contact Us</a>
+      </nav>
     </header>
-    <body>  
-        <!---Navigation--->
-        <!--This section of code defines the navigation bar at the top of the page.  The classes used here are defined in the style.css file.-->
-        <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
-            <div class="container">
-                <!--This code defines the "My Webpage" link in the top right corner of the navigation pane-->
-                <a class="navbar-brand" href="">My Webpage</a>
-                <!--This code defines the "List" link in the top left corner of the navigation pane-->
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="./list.html">List</a></li>
-                </ul>
-            </div>
-        </nav>
-        <!--This code creates the middle section of the webpage-->
-        <header class="masthead bg-primary text-white text-center">
-            <h1>My Movies</h1>
-        </header>
-        <!--Here is where the table will be loaded in.  The actual table will be loaded in JavaScript.-->
-        <section class="mt-5 text-center">
-            <div id="showDataJSON"></div>
-        </section>
-    </body>
 
-    <script>
+    <!-- Login Hero -->
+    <section class="hero">
+      <h1>Welcome!</h1>
+      <button class="btn--login">Log In</button>
+    </section>
 
-        /*
-        * RENDERING THE JSON TABLE
-        * Get JSON data from file
-        * Get headers from retrieved data
-        * Set headers for table
-        * Add data to table
-        * Add table to DOM
-        */
-        fetch('./list_data.json')
-            .then(response => response.json())
-            .then(data => {
-
-                /*
-                This section creates the base table and finds the root json node.
-                */
-                var jsonTable = document.createElement("table");
-                var tr = jsonTable.insertRow(-1);   
-                jsonTable.style.width = "75%";
-                let root;
-                for (let prop in data) {
-                    root = prop;
-                }
-
-                /*
-                This section selects the headers for the table
-                */
-                let headers = Object.keys(data[root][0]);
-                headers.forEach(header => {
-                    var th = document.createElement("th");      
-                    th.innerHTML = header;
-                    tr.appendChild(th);
-                })              
-                /*
-                This section adds the data into each row of the list
-                */
-                let items = Object.keys(data[root]);
-                items.forEach(item => {
-                    tr = jsonTable.insertRow(-1);
-                    for (let key in data[root][item]) {
-                       var tabCell = tr.insertCell(-1);
-                       tabCell.innerHTML = data[root][item][key];
-                    }
-                })
-                /*
-                This section adds the table to the HTML
-                */
-                var divContainer = document.getElementById("showDataJSON");
-                divContainer.innerHTML = "";
-                divContainer.appendChild(jsonTable);
-            });
-    </script>  
+    <div class="arc-bg"></div>
+    <footer>
+      <small>© 2025 AutoRemind. All rights reserved.</small>
+    </footer>
+  </body>
 </html>
